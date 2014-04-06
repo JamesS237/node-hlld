@@ -3,6 +3,10 @@ node-hlld
 
 A node.js client for https://github.com/armon/hlld
 
+## Installation
+
+`npm install hlld`
+
 ## Usage
 
 ```javascript
@@ -15,7 +19,7 @@ client.create(['hyperloglog'], function(err, okay) {
     client.set(['hyperloglog', 'redis'], function(err, okay) {
         assert(okay, true, 'everything is okay!');
         client.list(['hyperloglog'], function(err, data) {
-            assert.ok(data, 'everything is okay!s');
+            assert.ok(data, 'everything is okay!');
             data.forEach(function(value, key) {
                 console.log('key:', key, 'value:', value);
             });
