@@ -1,0 +1,28 @@
+{
+  "name": "hlld",
+  "version": "0.0.1",
+  "description": "HLLD client",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamesS237/node-hlld"
+  },
+  "keywords": [
+    "hll",
+    "hyperloglog",
+    "hlld",
+    "client"
+  ],
+  "author": "James Spencer <jamess237@icloud.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JamesS237/node-hlld/issues"
+  },
+  "homepage": "https://github.com/JamesS237/node-hlld"
+}
