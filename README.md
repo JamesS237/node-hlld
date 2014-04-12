@@ -41,6 +41,8 @@ client.create(['hyperloglog'], function(err, okay) {
 - Client-side hash
 - Bulk operations when possible
 - Maintain a set of open connections to the server
+- Better API documentation and test coverage
+- Add more TODOs :wink:
 
 ## Licence
 MIT
