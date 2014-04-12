@@ -35,5 +35,12 @@ client.create(['hyperloglog'], function(err, okay) {
 #### `hlld().x`
     Calls hlld method `x`
 
+## TODO
+- Connection Pool
+- Benchmark
+- Client-side hash
+- Bulk operations when possible
+- Maintain a set of open connections to the server
+
 ## Licence
 MIT
