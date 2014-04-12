@@ -4,6 +4,9 @@ var net = require('net'),
     util = require('util');
 
 function hlld(port, host, eol) {
+  if(!(this instanceof hlld)){
+    return new hlld(port, host, eol);
+  }
   this.port = port || 4553;
   this.host = host || 'localhost';
   this.eol = eol || os.EOL;
@@ -30,7 +33,8 @@ hlld.prototype._run = function(cmd, args, cb) {
 
       socket.on('data', function(chunk) {
         response_serialzier(this.cmd, chunk, function(err, data) {
-          return cb(err, data);
+          cb(err, data);
+          return socket.end();
         }.bind(this))
       }.bind(this))
     }.bind(this));
@@ -47,6 +51,7 @@ hlld.prototype.close = function(cb) {
 
 ["create", "list", "drop", "close", "clear", "set", "s", "bulk", "b", "info", "flush"].map(function(i) {
   hlld.prototype[i] = function(args, cb) {
+    if(["create", "drop", "close", "clear", "set", "s", "bulk", "b", "info"].indexOf(i) > -1 && args.length == 0) return cb(new Error("Command '" + i + "' must have more than one argument"), false);
     if(args instanceof Function) {
       cb = args;
       args = [];
@@ -61,7 +66,7 @@ var response_serialzier = function(cmd, data, cb) {
     return cmd.indexOf(i) > -1;
   }
 
-  if(data.toString('utf8').indexOf('Error') > -1) { //error!
+  if(data.toString('utf8').indexOf('Error') > -1 || data.toString('utf8').indexOf('Delete in progress') > -1) { //error!
     return cb(new Error(data.toString('utf8')));
   } else if(data.toString('utf8').indexOf('Done') > -1) { //std done
     return cb(null, true)
@@ -87,7 +92,7 @@ var response_serialzier = function(cmd, data, cb) {
     });
     return cb(null, out);
   } else {
-    return cb(('response could not be serialized!'));
+    return cb(new Error('response "' + data.toString('utf8') + '" could not be serialized!'));
   }
 };
 
