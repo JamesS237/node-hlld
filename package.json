@@ -1,6 +1,6 @@
 {
   "name": "hlld",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "HLLD client",
   "main": "index.js",
   "directories": {
